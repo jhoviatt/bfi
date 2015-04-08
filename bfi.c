@@ -84,12 +84,12 @@ int main()
   // close input file
   fclose(inFile);
 
-  printf("%s\n", bf);
+  //printf("%s\n", bf);  // print the string of bf
   //return 0;
 
 ///////////////////////////// interpret brainfuck /////////////////////////////////////
 
-  for(n = 1; n < strlen(bf); n++) 
+  for(n = 0; bf[n]/*n <= strlen(bf)i*/; n++) 
   {
     ch = bf[n];
     if(isspace(ch)) // skip whitespace
@@ -163,7 +163,7 @@ int main()
         }
         break;
       default:
-        printf("ERROR: non-brainfuck character encountered: %d\n", (int)ch);
+        printf("ERROR: non-brainfuck character encountered: %d\n", (int)ch); //return error and ascii of error character
         return 1;
     }
   }

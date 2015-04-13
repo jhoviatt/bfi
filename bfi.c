@@ -89,7 +89,7 @@ int main()
 
 ///////////////////////////// interpret brainfuck /////////////////////////////////////
 
-  for(n = 0; bf[n]/*n <= strlen(bf)i*/; n++) 
+  for(n = 0; bf[n]; n++) 
   {
     ch = bf[n];
     if(isspace(ch)) // skip whitespace
@@ -106,7 +106,7 @@ int main()
         (*(cells + i))--;
         break;
       case '>': // increment pointer
-        if(cells + i + 1)
+        if(i + 1 == size) // check if next is initialized
           i++;
         else
         {
@@ -131,9 +131,7 @@ int main()
         *(cells + i) = getchar();
         break;
       case '[': // start bracket loop
-        if(*(cells + i))
-          break;
-        else
+        if(!*(cells + i))
         {
           bracket++;
           while(bracket)
@@ -147,9 +145,7 @@ int main()
         }
         break;
       case ']': // end bracket loop
-        if(*(cells + i))
-          break;
-        else
+        if(!*(cells + i))
         {
           bracket++;
           while(bracket)
@@ -163,7 +159,7 @@ int main()
         }
         break;
       default:
-        printf("ERROR: non-brainfuck character encountered: %d\n", (int)ch); //return error and ascii of error character
+        printf("ERROR: non-brainfuck character encountered: %d\n", (int)ch); //return error and ascii of error causing character
         return 1;
     }
   }

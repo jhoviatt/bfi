@@ -106,7 +106,7 @@ int main()
         (*(cells + i))--;
         break;
       case '>': // increment pointer
-        if(i + 1 == size) // check if next is initialized
+        if(i + 1 != size) // check if next is initialized
           i++;
         else
         {
@@ -159,7 +159,8 @@ int main()
         }
         break;
       default:
-        printf("ERROR: non-brainfuck character encountered: %d\n", (int)ch); //return error and ascii of error causing character
+        printf("ERROR: non-brainfuck character encountered: %d\n", (int)ch); 
+        //return error and ascii of error causing character
         return 1;
     }
   }

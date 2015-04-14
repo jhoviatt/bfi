@@ -24,7 +24,7 @@
 #include <string.h>
 #include <ctype.h>
 
-int main()
+int main(int argc, char *argv[])
 {
 
 ///////////////////////////// declare and initialize variables ////////////////////////
@@ -43,15 +43,26 @@ int main()
   
   int bracket = 0;     // to find paired brackets
   
+///////////////////////////// check command line args /////////////////////////////////
+
+  if(argc != 2)
+  {
+    printf("ERROR: wrong number of arguments\n");
+    return 1;
+  }
+  
+  //printf("%s", argv[1]); // debugging
+
 ///////////////////////////// read files, memory allocation ///////////////////////////
 
   // calloc initial memory for cells
   cells = (int *)calloc(1, sizeof(int));
   
   // get file name
-  printf("brainfuck file: ");
-  scanf("%s", fileName);
-  printf("\n");
+  strcpy(fileName, argv[1]);
+  //printf("brainfuck file: ");
+  //scanf("%s", fileName);
+  //printf("\n");
 
   // open input file
   inFile = fopen(fileName, "r"); 

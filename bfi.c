@@ -84,18 +84,18 @@ int main()
   // close input file
   fclose(inFile);
 
-  //printf("%s\n", bf);  // print the string of bf
-  //return 0;
+  //printf("%s\n", bf);  // print the string of bf // for debugging
+  //return 0;                                      // for debugging
 
 ///////////////////////////// interpret brainfuck /////////////////////////////////////
 
   for(n = 0; bf[n]; n++) 
   {
     ch = bf[n];
-    if(isspace(ch)) // skip whitespace
+    if(isspace(ch)) // skip whitespace 
       continue;
-    if(n > fileSize)
-      printf("ERROR: string longer than file\n");
+    //if(n > fileSize) // commented out for optimization
+    //  printf("ERROR: string longer than file\n");
 
     //interpret brainfuck
     switch (ch){
@@ -130,7 +130,7 @@ int main()
       case ',': // read in value
         *(cells + i) = getchar();
         break;
-      case '[': // start bracket loop
+      case '[': // start bracket loop // loops could probably be faster
         if(!*(cells + i))
         {
           bracket++;

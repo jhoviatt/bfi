@@ -145,7 +145,7 @@ int main()
         }
         break;
       case ']': // end bracket loop
-        if(!*(cells + i))
+        if(*(cells + i))
         {
           bracket++;
           while(bracket)

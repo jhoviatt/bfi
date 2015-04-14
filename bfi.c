@@ -39,7 +39,6 @@ int main(int argc, char *argv[])
   
   FILE *inFile = NULL; // file to read brainfuck from
   int fileSize = 0;    // length of file text
-  char fileName[32];   // string for file name
   
   int bracket = 0;     // to find paired brackets
   
@@ -51,41 +50,28 @@ int main(int argc, char *argv[])
     return 1;
   }
   
-  //printf("%s", argv[1]); // debugging
+  //printf("%s", argv[1]); // print the string in argv[1] // for debugging
 
 ///////////////////////////// read files, memory allocation ///////////////////////////
 
   // calloc initial memory for cells
   cells = (int *)calloc(1, sizeof(int));
-  
-  // get file name
-  strcpy(fileName, argv[1]);
-  //printf("brainfuck file: ");
-  //scanf("%s", fileName);
-  //printf("\n");
 
   // open input file
-  inFile = fopen(fileName, "r"); 
+  inFile = fopen(argv[1], "r"); 
   if(!inFile)
-     printf("ERROR: file not opened properly\n");
+    printf("ERROR: file not opened properly\n");
 
   // count the length of the file string
-  while(!feof(inFile))
-  {
-    ch = fgetc(inFile);
-    fileSize++;
-  }
 
-  // close input file
-  fclose(inFile);
+  while(fgetc(inFile) != EOF)
+    fileSize++;
 
   // malloc string array
   bf = (char *)malloc(sizeof(char) * (fileSize + 1 + 1)); // one for space one for null
 
-  // reopen input file
-  inFile = fopen(fileName, "r"); 
-  if(!inFile)
-     printf("ERROR: file not opened properly\n");
+  // rewind input file to beginning
+  rewind(inFile);  
 
   // put file in bf string
   for(n = 0; n < fileSize; n++)
@@ -105,8 +91,6 @@ int main(int argc, char *argv[])
     ch = bf[n];
     if(isspace(ch)) // skip whitespace 
       continue;
-    //if(n > fileSize) // commented out for optimization
-    //  printf("ERROR: string longer than file\n");
 
     //interpret brainfuck
     switch (ch){
@@ -171,7 +155,8 @@ int main(int argc, char *argv[])
         break;
       default:
         printf("ERROR: non-brainfuck character encountered: %d\n", (int)ch); 
-        //return error and ascii of error causing character
+        // print error and ascii of error causing character
+        // change this later to allow for comments
         return 1;
     }
   }

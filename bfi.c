@@ -1,7 +1,6 @@
 
 
 // A brainfuck interpreter in C
-
 // Jared Henry Oviatt
 
 // good brief description of brainfuck

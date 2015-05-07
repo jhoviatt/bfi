@@ -94,10 +94,10 @@ int main(int argc, char *argv[])
     //interpret brainfuck
     switch (ch){
       case '+': // increment pointer value
-        (*(cells + i))++;
+        cells[i]++;
         break;
       case '-': // decrement pointer value
-        (*(cells + i))--;
+        cells[i]--;
         break;
       case '>': // increment pointer
         if(i + 1 != size) // check if next is initialized
@@ -106,7 +106,7 @@ int main(int argc, char *argv[])
         {
           cells = (int *)realloc(cells, sizeof(int) * ++size);
           i++;
-          *(cells + i) = 0;
+          cells[i] = 0;
         }
         break;
       case '<': // decrement pointer
@@ -119,13 +119,13 @@ int main(int argc, char *argv[])
         }
         break;
       case '.': // output pointer value
-        putchar(*(cells + i));
+        putchar(cells[i]);
         break;
       case ',': // read in value
-        *(cells + i) = getchar();
+        cells[i] = getchar();
         break;
       case '[': // start bracket loop // loops could probably be faster
-        if(!*(cells + i))
+        if(!cells[i])
         {
           bracket++;
           while(bracket)
@@ -139,7 +139,7 @@ int main(int argc, char *argv[])
         }
         break;
       case ']': // end bracket loop
-        if(*(cells + i))
+        if(cells[i])
         {
           bracket++;
           while(bracket)
